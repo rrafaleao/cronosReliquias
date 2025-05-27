@@ -364,43 +364,8 @@
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
-        }
+        } 
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            color: var(--dourado-antigo);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-3px);
-            color: var(--cobre-envelhecido);
-        }
-
-        /* Animations */
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes shine {
-            from { filter: brightness(1); }
-            to { filter: brightness(1.2); }
-        }
-
-        @keyframes stars {
-            from { transform: translateX(0); }
-            to { transform: translateX(100px); }
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -420,7 +385,6 @@
             }
         }
 
-        /* Clock animation */
         .clock-hands {
             position: absolute;
             top: 50%;
@@ -445,16 +409,6 @@
             width: 2px;
             height: 80px;
             animation: minute-rotate 3600s linear infinite;
-        }
-
-        @keyframes hour-rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes minute-rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -492,10 +446,7 @@
                     <p>Nossa expertise abrange desde relógios de bolso victorianos até cronômetros suíços contemporâneos, sempre com o mesmo compromisso inabalável com a excelência e autenticidade.</p>
                 </div>
                 <div class="about-image">
-                    <div class="gear-animation">⚙</div>
                     <div class="clock-hands">
-                        <div class="hand hour-hand"></div>
-                        <div class="hand minute-hand"></div>
                     </div>
                 </div>
             </div>
@@ -589,12 +540,6 @@
         <div class="footer-content">
             <h3 style="font-family: 'Playfair Display', serif; color: var(--dourado-antigo); margin-bottom: 1rem;">Cronos Relíquias</h3>
             <p>Preservando o tempo, honrando a tradição</p>
-            <div class="social-links">
-                <a href="#">📘</a>
-                <a href="#">📷</a>
-                <a href="#">🐦</a>
-                <a href="#">💼</a>
-            </div>
             <p style="opacity: 0.7; margin-top: 2rem;">&copy; 2024 Cronos Relíquias. Todos os direitos reservados.</p>
         </div>
     </footer>
