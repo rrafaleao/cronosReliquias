@@ -43,29 +43,35 @@
             line-height: 1.6;
         }
 
+        /* HEADER FIXO COM ALTURA CONSISTENTE */
         .header {
             position: fixed;
             top: 0;
             width: 100%;
+            height: 70px; /* Altura fixa para consistência */
             background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 2px solid var(--dourado-antigo);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
+            padding: 0 5%; /* Ajuste de padding */
             max-width: 1400px;
             margin: 0 auto;
+            width: 100%;
+            height: 100%; /* Ocupa toda altura do header */
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.8rem; /* Tamanho ajustado */
             font-weight: 700;
             color: var(--dourado-antigo);
             text-decoration: none;
@@ -76,7 +82,7 @@
 
         .logo::before {
             content: "⚙";
-            font-size: 1.5rem;
+            font-size: 1.3rem; /* Tamanho ajustado */
             animation: rotate 8s linear infinite;
         }
 
@@ -88,7 +94,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.8rem; /* Espaçamento ajustado */
         }
 
         .nav-links a {
@@ -97,6 +103,7 @@
             font-weight: 400;
             transition: all 0.3s ease;
             position: relative;
+            font-size: 1rem; /* Tamanho consistente */
         }
 
         .nav-links a:hover {
@@ -118,9 +125,10 @@
             width: 100%;
         }
         
+        /* Conteúdo principal com padding-top igual à altura do header */
         .main-content {
             flex: 1;
-            padding-top: 80px;
+            padding-top: 70px; /* Igual à altura do header */
             width: 100%;
         }
 
@@ -655,6 +663,7 @@
             width: 30px;
             height: 21px;
             cursor: pointer;
+            z-index: 1001;
         }
 
         .menu-toggle span {
@@ -666,10 +675,10 @@
             transition: all 0.3s ease;
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
-                top: 70px;
+                top: 70px; /* Ajustado para altura do header */
                 left: 0;
                 width: 100%;
                 background: rgba(13, 13, 13, 0.95);
@@ -693,6 +702,10 @@
                 min-width: 100%;
             }
 
+            .page-header {
+                height: 300px;
+            }
+
             .page-header h1 {
                 font-size: 2rem;
             }
@@ -712,6 +725,7 @@
     </style>
 </head>
 <body>
+    <!-- Header com altura fixa -->
     <header class="header">
         <nav class="nav">
             <a href="#" class="logo">Cronos Relíquias</a>
@@ -1051,6 +1065,16 @@
                 top: 0,
                 behavior: 'smooth'
             });
+        });
+        
+        // Efeito de mudança de fundo no scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(13, 13, 13, 0.98)';
+            } else {
+                header.style.background = 'rgba(13, 13, 13, 0.95)';
+            }
         });
     </script>
 </body>

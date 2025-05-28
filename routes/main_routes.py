@@ -13,3 +13,11 @@ def teste():
 @main.route('/catalogo')
 def catalogo():
     return render_template('catalog.html')
+
+@main.route('/contato')
+def contato():
+    return render_template('contact.html')
+
+@main.route('/blog')
+def blog():
+    return render_template('blog.html')
