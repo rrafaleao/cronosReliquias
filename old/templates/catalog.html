@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronos Relíquias - Catálogo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-meia-noite: #191970;
+            --preto-onix: #0D0D0D;
+            --dourado-antigo: #CFB53B;
+            --cobre-envelhecido: #B87333;
+            --branco-puro: #FFFFFF;
+            --cinza-elegante: #2A2A2A;
+            --sombra-dourada: 0 5px 15px rgba(207, 181, 59, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, var(--preto-onix) 0%, var(--azul-meia-noite) 100%);
+            color: var(--branco-puro);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--dourado-antigo);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dourado-antigo);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "⚙";
+            font-size: 1.5rem;
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--branco-puro);
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--dourado-antigo);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--dourado-antigo);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding-top: 80px;
+            padding-bottom: 40px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .footer {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px 5%;
+            border-top: 2px solid var(--dourado-antigo);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dourado-antigo);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--dourado-antigo);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--branco-puro);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado-antigo);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cinza-elegante);
+            color: var(--dourado-antigo);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-dourada);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--dourado-antigo);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Estilos para o catálogo */
+        .page-header {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(13,13,13,0.8));
+            z-index: 1;
+        }
+        
+        .page-header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .page-header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .page-header-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .catalog-section {
+            padding: 2rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: rgba(42, 42, 42, 0.4);
+            border-radius: 10px;
+            border: 1px solid rgba(207, 181, 59, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(207, 181, 59, 0.4);
+        }
+        
+        .product-image-container {
+            position: relative;
+            height: 0;
+            padding-bottom: 75%;
+            overflow: hidden;
+        }
+        
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+        
+        .product-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(13, 13, 13, 0.9), transparent);
+        }
+        
+        .product-tags {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 2;
+        }
+        
+        .product-tag {
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .product-tag-style {
+            background: rgba(42, 42, 42, 0.8);
+            color: white;
+        }
+        
+        .zoom-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: rgba(207, 181, 59, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            cursor: pointer;
+        }
+        
+        .product-card:hover .zoom-icon {
+            opacity: 1;
+        }
+        
+        .product-details {
+            padding: 1.5rem;
+        }
+        
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-year {
+            display: flex;
+            align-items: center;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .product-year i {
+            color: var(--dourado-antigo);
+            margin-right: 0.5rem;
+        }
+        
+        .product-description {
+            color: #a0a0a0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-price {
+            font-family: 'Playfair Display', serif;
+            color: var(--dourado-antigo);
+            font-size: 1.25rem;
+        }
+        
+        .product-button {
+            background: rgba(207, 181, 59, 0.9);
+            color: var(--preto-onix);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .product-button:hover {
+            background: var(--dourado-antigo);
+        }
+        
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(13, 13, 13, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                clip-path: circle(0px at top right);
+                transition: clip-path 0.6s ease;
+            }
+            
+            .nav-links.active {
+                clip-path: circle(150% at top right);
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+            
+            .page-header-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .page-header {
+                height: 300px;
+            }
+        }
+
+        /* Estilo para a mensagem de coleção completa */
+        .collection-message {
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+        
+        .collection-message h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dourado-antigo);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .collection-message p {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">Cronos Relíquias</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">Início</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li><a href="/servicos">Serviços</a></li>
+                <li><a href="/galeria">Galeria</a></li>
+                <li><a href="/catalogo">Catálogo</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- Cabeçalho da página -->
+        <div class="page-header" style="background-image: url('https://images.pexels.com/photos/2113994/pexels-photo-2113994.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');">
+            <div class="page-header-content">
+                <h1 class="page-header-title">Catálogo Completo</h1>
+                <p class="page-header-subtitle">Explore nossa coleção exclusiva de relógios históricos e peças raras</p>
+            </div>
+        </div>
+        
+        <!-- Mensagem sobre a coleção -->
+        <div class="collection-message">
+            <h2>Coleção Histórica Completa</h2>
+            <p>Apresentamos nossa seleção completa de relógios históricos. Cada peça é uma testemunha do tempo, meticulosamente restaurada e pronta para ser apreciada. Explore estas maravilhas da engenharia e arte relojoeira.</p>
+        </div>
+        
+        <!-- Seção do catálogo -->
+        <section class="catalog-section">
+            <div class="container">
+                <!-- Grade de produtos -->
+                <div id="productGrid" class="products-grid">
+                    <!-- Produtos serão renderizados aqui via JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Cronos Relíquias</h3>
+                <p>Especialistas em restauração e conservação de relíquias históricas e antiguidades. Preservando o passado para as gerações futuras.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <a href="/">Início</a>
+                <a href="/sobre">Sobre Nós</a>
+                <a href="/servicos">Serviços</a>
+                <a href="/galeria">Galeria</a>
+                <a href="/contato">Contato</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Rua das Antiguidades, 123 - Centro</p>
+                <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+                <p><i class="fas fa-envelope"></i> contato@cronosreliquias.com.br</p>
+                <p><i class="fas fa-clock"></i> Seg-Sex: 9h-18h | Sáb: 10h-14h</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Cronos Relíquias. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Dados dos produtos
+        const productsData = [
+            {
+                id: 1,
+                name: "Relógio de Bolso Vitoriano",
+                description: "Relógio de bolso em ouro 18k com gravuras intrincadas da era vitoriana, mecanismo de corda manual perfeitamente preservado.",
+                price: "R$ 15.000",
+                period: "victorian",
+                style: "pocket",
+                year: "1890",
+                image: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            },
+            {
+                id: 2,
+                name: "Relógio de Pulso Art Déco",
+                description: "Design geométrico característico dos anos 20, com pulseira em couro genuíno e mostrador em esmalte branco.",
+                price: "R$ 12.500",
+                period: "artdeco",
+                style: "wristwatch",
+                year: "1925",
+                image: "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            },
+            {
+                id: 3,
+                name: "Cronógrafo Eduardiano",
+                description: "Cronógrafo de precisão com caixa em prata esterlina, fabricado para eventos esportivos da alta sociedade.",
+                price: "R$ 18.900",
+                period: "edwardian",
+                style: "chronograph",
+                year: "1910",
+                image: "https://images.pexels.com/photos/2783873/pexels-photo-2783873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            },
+            {
+                id: 4,
+                name: "Relógio de Pêndulo Louis XV",
+                description: "Relógio de pêndulo estilo rococó com detalhes em bronze dourado e caixa de madeira de nogueira.",
+                price: "R$ 32.000",
+                period: "victorian",
+                style: "pendulum",
+                year: "1875",
+                image: "https://i.ebayimg.com/images/g/M1kAAeSw6KNoIO-q/s-l225.jpg"
+            },
+            {
+                id: 5,
+                name: "Cronômetro Marinho",
+                description: "Instrumento de navegação de precisão usado em navios do início do século XX, com certificado de calibração original.",
+                price: "R$ 24.750",
+                period: "vintage",
+                style: "marine",
+                year: "1920",
+                image: "https://thumbs.dreamstime.com/b/primeiro-cron%C3%B4metro-marinho-feito-pelo-famoso-relojoeiro-thomas-mudge-no-s%C3%A9culo-na-gr%C3%A3-bretanha-nomeou-vigia-para-o-rei-mas-219593929.jpg"
+            },
+            {
+                id: 6,
+                name: "Relógio de Pulso Mid-Century",
+                description: "Design modernista dos anos 50 com mostrador em azul cobalto e caixa em aço inoxidável.",
+                price: "R$ 9.800",
+                period: "midcentury",
+                style: "wristwatch",
+                year: "1955",
+                image: "https://images.pexels.com/photos/2783873/pexels-photo-2783873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            },
+            {
+                id: 7,
+                name: "Relógio de Bolso Edwardiano",
+                description: "Relógio de bolso com tampa gravada e corrente em ouro 14k, mecanismo suíço de alta precisão.",
+                price: "R$ 14.200",
+                period: "edwardian",
+                style: "pocket",
+                year: "1905",
+                image: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            },
+            {
+                id: 8,
+                name: "Relógio Art Déco com Diamantes",
+                description: "Peça de joalheria com diamantes incrustados e design geométrico característico do período entre guerras.",
+                price: "R$ 28.500",
+                period: "artdeco",
+                style: "wristwatch",
+                year: "1930",
+                image: "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            }
+        ];
+
+        // Referências aos elementos DOM
+        const productGrid = document.getElementById('productGrid');
+        
+        // Renderizar produtos
+        function renderProducts() {
+            let productsHTML = '';
+            
+            productsData.forEach(product => {
+                productsHTML += `
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <div class="product-image" style="background-image: url('${product.image}')"></div>
+                            <div class="product-image-overlay"></div>
+                            <div class="product-tags">
+                                <span class="product-tag">
+                                    ${product.period === 'victorian' ? 'Era Vitoriana' : 
+                                      product.period === 'edwardian' ? 'Era Eduardiana' : 
+                                      product.period === 'artdeco' ? 'Art Déco' : 
+                                      product.period === 'midcentury' ? 'Meados do Século XX' : 
+                                      'Vintage'}
+                                </span>
+                                <span class="product-tag product-tag-style">
+                                    ${product.style === 'pocket' ? 'Relógio de Bolso' : 
+                                      product.style === 'wristwatch' ? 'Relógio de Pulso' : 
+                                      product.style === 'pendulum' ? 'Relógio de Pêndulo' : 
+                                      product.style === 'chronograph' ? 'Cronógrafo' : 
+                                      'Cronômetro Marinho'}
+                                </span>
+                            </div>
+                            <div class="zoom-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                        <div class="product-details">
+                            <h3 class="product-name">${product.name}</h3>
+                            <div class="product-year">
+                                <i class="fas fa-clock"></i>
+                                <span>${product.year}</span>
+                            </div>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-footer">
+                                <span class="product-price">${product.price}</span>
+                                <button class="product-button">Explorar Mecanismo</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            productGrid.innerHTML = productsHTML;
+        }
+        
+        // Efeito 3D nos cards
+        function initCardEffects() {
+            const cards = document.querySelectorAll('.product-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                });
+            });
+        }
+        
+        // Inicializar
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            
+            // Adicionar efeitos após o carregamento
+            setTimeout(initCardEffects, 100);
+        });
+        
+        // Menu mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Botão voltar ao topo
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Fechar menu ao clicar em um link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
