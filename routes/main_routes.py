@@ -10,6 +10,14 @@ def index():
 def teste():
     return render_template('about.html')
 
+@main.route('/servicos')
+def servicos():
+    return render_template('servicos.html')
+
+@main.route('/galeria')
+def galeria():
+    return render_template('galeria.html')
+
 @main.route('/catalogo')
 def catalogo():
     return render_template('catalog.html')

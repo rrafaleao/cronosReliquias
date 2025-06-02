@@ -6,8 +6,10 @@
     <title>Cronos Relíquias - Contato</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/drive-storage/AJQWtBPxychlj9GyHZAaa2_hlrA7FI0qY-msNk1TRHz4_Tq7nIIJbwxjEUc8bB1nKQkWmNc0Bu5dAwyoFRbVLnycfAvoY21sp2JeeMebB3Nkd86ZlDg=w1351-h633" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
     <style>
         :root {
             --azul-meia-noite: #191970;
@@ -176,6 +178,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             margin-bottom: 40px;
+            align-items: start;
         }
 
         .contact-form {
@@ -321,59 +324,12 @@
             margin-bottom: 40px;
         }
 
-        .map-placeholder {
+        #map {
             width: 100%;
             height: 400px;
-            background: linear-gradient(135deg, rgba(25, 25, 112, 0.5), rgba(13, 13, 13, 0.5));
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            color: var(--dourado-antigo);
-            border: 2px dashed rgba(207, 181, 59, 0.3);
-        }
-
-        .map-placeholder i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .map-placeholder p {
-            font-size: 1.1rem;
-            text-align: center;
-        }
-
-        .business-hours {
-            background: rgba(25, 25, 112, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
-            margin-top: 30px;
-            border: 1px solid rgba(207, 181, 59, 0.2);
-        }
-
-        .hours-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .hours-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .day {
-            color: var(--dourado-antigo);
-            font-weight: 500;
-        }
-
-        .time {
-            opacity: 0.9;
+            overflow: hidden;
+            border: 2px solid rgba(207, 181, 59, 0.3);
         }
 
         .footer {
@@ -548,10 +504,6 @@
                 padding: 30px;
             }
             
-            .hours-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .footer-section {
                 min-width: 100%;
             }
@@ -570,6 +522,19 @@
             .section-title {
                 font-size: 1.8rem;
             }
+        }
+
+        /* Custom marker icon styling */
+        .custom-marker {
+            background-color: var(--dourado-antigo);
+            color: var(--preto-onix);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 3px solid var(--preto-onix);
+            box-shadow: 0 0 10px rgba(207, 181, 59, 0.5);
         }
     </style>
 </head>
@@ -666,49 +631,12 @@
                         <p>Siga-nos nas redes sociais para acompanhar nossos trabalhos e novidades do mundo da restauração.</p>
                     </div>
                 </div>
-
-                <div class="business-hours">
-                    <h3 class="section-title">Horário de Funcionamento</h3>
-                    <div class="hours-grid">
-                        <div class="hours-item">
-                            <span class="day">Segunda-feira</span>
-                            <span class="time">9h - 18h</span>
-                        </div>
-                        <div class="hours-item">
-                            <span class="day">Terça-feira</span>
-                            <span class="time">9h - 18h</span>
-                        </div>
-                        <div class="hours-item">
-                            <span class="day">Quarta-feira</span>
-                            <span class="time">9h - 18h</span>
-                        </div>
-                        <div class="hours-item">
-                            <span class="day">Quinta-feira</span>
-                            <span class="time">9h - 18h</span>
-                        </div>
-                        <div class="hours-item">
-                            <span class="day">Sexta-feira</span>
-                            <span class="time">9h - 18h</span>
-                        </div>
-                        <div class="hours-item">
-                            <span class="day">Sábado</span>
-                            <span class="time">10h - 14h</span>
-                        </div>
-                        <div class="hours-item">
-                            <span class="day">Domingo</span>
-                            <span class="time">Fechado</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
         <section class="map-section">
             <h2 class="section-title">Nossa Localização</h2>
-            <div class="map-placeholder">
-                <i class="fas fa-map-marked-alt"></i>
-                <p>Mapa interativo será carregado aqui<br>Rua das Antiguidades, 123 - Centro Histórico</p>
-            </div>
+            <div id="map"></div>
         </section>
     </main>
 
@@ -751,3 +679,95 @@
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        // Inicialização do mapa
+        document.addEventListener('DOMContentLoaded', function() {
+            // Coordenadas do Centro Histórico de São Paulo (aproximadas)
+            const lat = -29.7012922;
+            const lng = -51.1347329;
+
+
+            // Inicializar o mapa
+            const map = L.map('map').setView([lat, lng], 16);
+
+            // Adicionar camada do mapa (OpenStreetMap)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 19
+            }).addTo(map);
+
+            // Criar ícone personalizado
+            const customIcon = L.divIcon({
+                html: '<div class="custom-marker"><i class="fas fa-map-marker-alt"></i></div>',
+                className: 'custom-div-icon',
+                iconSize: [30, 30],
+                iconAnchor: [15, 30]
+            });
+
+            // Adicionar marcador
+            const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+
+            // Adicionar popup ao marcador
+            marker.bindPopup(`
+                <div style="text-align: center; color: #0D0D0D; font-family: 'Lato', sans-serif;">
+                    <h4 style="color: #CFB53B; margin-bottom: 8px; font-family: 'Playfair Display', serif;">Cronos Relíquias</h4>
+                    <p style="margin: 5px 0; font-size: 14px;"><strong>Av. Nações Unidas, 3760</strong></p>
+                    <p style="margin: 5px 0; font-size: 14px;">Rio Branco</p>
+                    <p style="margin: 5px 0; font-size: 14px;">Novo Hamburgo - RS</p>
+                    <p style="margin: 10px 0 5px 0; font-size: 13px; color: #666;"><i class="fas fa-phone" style="color: #CFB53B;"></i> (11) 99999-9999</p>
+                </div>
+            `);
+
+            // Abrir popup automaticamente
+            marker.openPopup();
+        });
+
+        // Menu toggle functionality
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        });
+
+        // Back to top functionality
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add smooth scroll to anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation to page
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>

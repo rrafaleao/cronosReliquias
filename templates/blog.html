@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronos Relíquias - Blog</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/drive-storage/AJQWtBPxychlj9GyHZAaa2_hlrA7FI0qY-msNk1TRHz4_Tq7nIIJbwxjEUc8bB1nKQkWmNc0Bu5dAwyoFRbVLnycfAvoY21sp2JeeMebB3Nkd86ZlDg=w1351-h633" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -121,9 +123,8 @@
             padding-right: 5%;
         }
 
-        /* Blog Specific Styles */
         .blog-hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23191970" width="1200" height="400"/><path fill="%23CFB53B" opacity="0.1" d="M0,320L48,298.7C96,277,192,235,288,213.3C384,192,480,192,576,208C672,224,768,256,864,250.7C960,245,1056,203,1152,202.7C1248,203,1344,245,1392,266.7L1440,288L1440,400L1392,400C1344,400,1248,400,1152,400C1056,400,960,400,864,400C768,400,672,400,576,400C480,400,384,400,288,400C192,400,96,400,48,400L0,400Z"/></svg>');
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1617806118233-18e1de247200?q=80&w=1935&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             height: 400px;
@@ -175,17 +176,11 @@
             line-height: 1.6;
         }
 
-        .blog-container {
+        .featured-section {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 3rem;
             margin-bottom: 3rem;
-        }
-
-        .blog-main {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
         }
 
         .featured-post {
@@ -205,29 +200,19 @@
         .featured-image {
             width: 100%;
             height: 300px;
-            background: linear-gradient(45deg, var(--azul-meia-noite), var(--cinza-elegante));
             position: relative;
             overflow: hidden;
         }
-
-        .featured-image::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: var(--dourado-antigo);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            content: '\f1c0';
-            font-size: 2rem;
-            color: var(--preto-onix);
+        
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .featured-post:hover .featured-image img {
+            transform: scale(1.05);
         }
 
         .post-content {
@@ -281,84 +266,12 @@
             transform: translateY(-2px);
         }
 
-        .blog-posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .blog-post {
-            background: rgba(42, 42, 42, 0.7);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(207, 181, 59, 0.1);
-        }
-
-        .blog-post:hover {
-            transform: translateY(-3px);
-            border-color: var(--dourado-antigo);
-            box-shadow: var(--sombra-dourada);
-        }
-
-        .blog-post-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, var(--azul-meia-noite), var(--cinza-elegante));
-            position: relative;
-        }
-
-        .blog-post-image::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            background: var(--dourado-antigo);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            content: '\f1c0';
-            font-size: 1.2rem;
-            color: var(--preto-onix);
-        }
-
-        .blog-post-content {
-            padding: 1.5rem;
-        }
-
-        .blog-post-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--branco-puro);
-            margin-bottom: 0.8rem;
-            line-height: 1.3;
-        }
-
-        .blog-post-excerpt {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .blog-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .sidebar-widget {
+        .newsletter-widget {
             background: rgba(42, 42, 42, 0.7);
             padding: 2rem;
             border-radius: 15px;
             border: 1px solid rgba(207, 181, 59, 0.2);
+            height: fit-content;
         }
 
         .widget-title {
@@ -413,167 +326,62 @@
             transform: translateY(-2px);
         }
 
-        .recent-posts {
-            list-style: none;
+        .blog-posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        .recent-posts li {
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .recent-posts li:last-child {
-            border-bottom: none;
-        }
-
-        .recent-posts a {
-            color: var(--branco-puro);
-            text-decoration: none;
-            font-size: 0.9rem;
-            line-height: 1.4;
-            transition: color 0.3s ease;
-        }
-
-        .recent-posts a:hover {
-            color: var(--dourado-antigo);
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background: rgba(207, 181, 59, 0.2);
-            color: var(--dourado-antigo);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.8rem;
+        .blog-post {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
             transition: all 0.3s ease;
+            border: 1px solid rgba(207, 181, 59, 0.1);
         }
 
-        .tag:hover {
-            background: var(--dourado-antigo);
-            color: var(--preto-onix);
-        }
-
-        .footer {
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 40px 5%;
-            border-top: 2px solid var(--dourado-antigo);
-            margin-top: auto;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .footer-section h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--dourado-antigo);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--dourado-antigo);
-        }
-
-        .footer-section p, .footer-section a {
-            color: var(--branco-puro);
-            margin-bottom: 10px;
-            line-height: 1.6;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: var(--dourado-antigo);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--cinza-elegante);
-            color: var(--dourado-antigo);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            background: var(--dourado-antigo);
-            color: var(--preto-onix);
+        .blog-post:hover {
             transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--dourado-antigo);
-            color: var(--preto-onix);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-
-        .back-to-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-5px);
+            border-color: var(--dourado-antigo);
             box-shadow: var(--sombra-dourada);
+        }
+
+        .blog-post-image {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-post:hover .blog-post-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-post-content {
+            padding: 1.5rem;
+        }
+
+        .blog-post-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--branco-puro);
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .blog-post-excerpt {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
         }
 
         .menu-toggle {
@@ -617,7 +425,7 @@
                 display: flex;
             }
             
-            .blog-container {
+            .featured-section {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
@@ -628,10 +436,6 @@
             
             .blog-hero p {
                 font-size: 1.1rem;
-            }
-            
-            .footer-section {
-                min-width: 100%;
             }
         }
 
@@ -684,138 +488,90 @@
             </div>
         </section>
 
-        <div class="blog-container">
-            <div class="blog-main">
-                <!-- Post em Destaque -->
-                <article class="featured-post">
-                    <div class="featured-image"></div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span><i class="fas fa-calendar"></i> 15 de Dezembro, 2023</span>
-                            <span><i class="fas fa-user"></i> Dr. Helena Moreira</span>
-                            <span><i class="fas fa-folder"></i> Restauração</span>
-                        </div>
-                        <h2 class="post-title">A Arte de Restaurar: Técnicas Milenares Encontram Tecnologia Moderna</h2>
-                        <p class="post-excerpt">
-                            Descobra como combinamos métodos tradicionais de restauração com as mais avançadas tecnologias de conservação para preservar artefatos históricos únicos. Uma jornada fascinante através do tempo e da ciência.
-                        </p>
-                        <a href="#" class="read-more">
-                            Ler Artigo Completo <i class="fas fa-arrow-right"></i>
-                        </a>
+        <div class="featured-section">
+            <!-- Post em Destaque -->
+            <article class="featured-post">
+                <div class="featured-image">
+                    <img src="https://thumbs.dreamstime.com/z/o-processo-de-instalar-uma-pe%C3%A7a-em-um-rel%C3%B3gio-mec%C3%A2nico-reparo-do-121427392.jpg?ct=jpeg" alt="Restauração de artefato histórico">
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span><i class="fas fa-calendar"></i> 15 de Dezembro, 2023</span>
+                        <span><i class="fas fa-user"></i> Dr. Helena Moreira</span>
+                        <span><i class="fas fa-folder"></i> Restauração</span>
                     </div>
-                </article>
-
-                <!-- Grid de Posts -->
-                <div class="blog-posts-grid">
-                    <article class="blog-post">
-                        <div class="blog-post-image"></div>
-                        <div class="blog-post-content">
-                            <div class="post-meta">
-                                <span><i class="fas fa-calendar"></i> 10 de Dezembro, 2023</span>
-                                <span><i class="fas fa-folder"></i> História</span>
-                            </div>
-                            <h3 class="blog-post-title">Os Segredos dos Manuscritos Medievais</h3>
-                            <p class="blog-post-excerpt">
-                                Uma análise profunda sobre as técnicas utilizadas na preservação de manuscritos medievais e os desafios únicos que cada período histórico apresenta.
-                            </p>
-                            <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-
-                    <article class="blog-post">
-                        <div class="blog-post-image"></div>
-                        <div class="blog-post-content">
-                            <div class="post-meta">
-                                <span><i class="fas fa-calendar"></i> 5 de Dezembro, 2023</span>
-                                <span><i class="fas fa-folder"></i> Conservação</span>
-                            </div>
-                            <h3 class="blog-post-title">Climatização: O Segredo da Longevidade</h3>
-                            <p class="blog-post-excerpt">
-                                Como o controle ambiental adequado pode significar a diferença entre a preservação e a deterioração de artefatos históricos preciosos.
-                            </p>
-                            <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-
-                    <article class="blog-post">
-                        <div class="blog-post-image"></div>
-                        <div class="blog-post-content">
-                            <div class="post-meta">
-                                <span><i class="fas fa-calendar"></i> 1 de Dezembro, 2023</span>
-                                <span><i class="fas fa-folder"></i> Técnicas</span>
-                            </div>
-                            <h3 class="blog-post-title">Raio-X em Obras de Arte: Revelando o Invisível</h3>
-                            <p class="blog-post-excerpt">
-                                Explore como tecnologias de imageamento não-invasivas revolucionaram nossa compreensão sobre obras de arte antigas.
-                            </p>
-                            <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-
-                    <article class="blog-post">
-                        <div class="blog-post-image"></div>
-                        <div class="blog-post-content">
-                            <div class="post-meta">
-                                <span><i class="fas fa-calendar"></i> 28 de Novembro, 2023</span>
-                                <span><i class="fas fa-folder"></i> Casos</span>
-                            </div>
-                            <h3 class="blog-post-title">Caso de Sucesso: Restauração de Relógio Século XVIII</h3>
-                            <p class="blog-post-excerpt">
-                                Acompanhe passo a passo a restauração completa de um relógio de mesa do século XVIII, desde o diagnóstico até a entrega final.
-                            </p>
-                            <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-
-                    <article class="blog-post">
-                        <div class="blog-post-image"></div>
-                        <div class="blog-post-content">
-                            <div class="post-meta">
-                                <span><i class="fas fa-calendar"></i> 25 de Novembro, 2023</span>
-                                <span><i class="fas fa-folder"></i> Educação</span>
-                            </div>
-                            <h3 class="blog-post-title">Como Cuidar de Antiguidades em Casa</h3>
-                            <p class="blog-post-excerpt">
-                                Dicas essenciais para colecionadores e entusiastas sobre como preservar adequadamente suas peças históricas em ambiente doméstico.
-                            </p>
-                            <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-
-                    <article class="blog-post">
-                        <div class="blog-post-image"></div>
-                        <div class="blog-post-content">
-                            <div class="post-meta">
-                                <span><i class="fas fa-calendar"></i> 20 de Novembro, 2023</span>
-                                <span><i class="fas fa-folder"></i> Materiais</span>
-                            </div>
-                            <h3 class="blog-post-title">A Ciência dos Pigmentos Antigos</h3>
-                            <p class="blog-post-excerpt">
-                                Uma jornada através da história dos pigmentos utilizados em arte e como identificamos e preservamos essas cores únicas.
-                            </p>
-                            <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-
-            <aside class="blog-sidebar">
-                <!-- Newsletter -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">Newsletter</h3>
-                    <p style="text-align: center; margin-bottom: 1.5rem; color: rgba(255,255,255,0.8);">
-                        Receba conteúdo exclusivo sobre restauração e conservação diretamente em seu e-mail.
+                    <h2 class="post-title">A Arte de Restaurar: Técnicas Milenares Encontram Tecnologia Moderna</h2>
+                    <p class="post-excerpt">
+                        Descobra como combinamos métodos tradicionais de restauração com as mais avançadas tecnologias de conservação para preservar artefatos históricos únicos. Uma jornada fascinante através do tempo e da ciência.
                     </p>
-                    <form class="newsletter-form">
-                        <input type="text" class="newsletter-input" placeholder="Seu nome" required>
-                        <input type="email" class="newsletter-input" placeholder="Seu e-mail" required>
-                        <button type="submit" class="newsletter-btn">
-                            <i class="fas fa-paper-plane"></i> Assinar Newsletter
-                        </button>
-                    </form>
+                    <a href="#" class="read-more">
+                        Ler Artigo Completo <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
+            </article>
 
-                <!-- Posts Recentes -->
-                <div class="sidebar-widget">
-                    <h3 class="widget-title">Posts Recentes</h3>
-                    <ul class="recent-posts">
+            <!-- Newsletter -->
+            <div class="newsletter-widget">
+                <h3 class="widget-title">Newsletter</h3>
+                <p style="text-align: center; margin-bottom: 1.5rem; color: rgba(255,255,255,0.8);">
+                    Receba conteúdo exclusivo sobre restauração e conservação diretamente em seu e-mail.
+                </p>
+                <form class="newsletter-form">
+                    <input type="text" class="newsletter-input" placeholder="Seu nome" required>
+                    <input type="email" class="newsletter-input" placeholder="Seu e-mail" required>
+                    <button type="submit" class="newsletter-btn">
+                        <i class="fas fa-paper-plane"></i> Assinar Newsletter
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Grid de Posts -->
+        <div class="blog-posts-grid">
+            <article class="blog-post">
+                <div class="blog-post-image">
+                    <img src="https://images.pexels.com/photos/8327954/pexels-photo-8327954.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Relógios antigos">
+                </div>
+                <div class="blog-post-content">
+                    <div class="post-meta">
+                        <span><i class="fas fa-calendar"></i> 28 de Novembro, 2023</span>
+                        <span><i class="fas fa-folder"></i> Relíquias</span>
+                    </div>
+                    <h3 class="blog-post-title">O Fascínio dos Relógios Antigos</h3>
+                    <p class="blog-post-excerpt">
+                        Conheça a história e os desafios técnicos envolvidos na restauração de relógios mecânicos do século XIX.
+                    </p>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            
+            <article class="blog-post">
+                <div class="blog-post-image">
+                    <img src="https://rciararaquara.com.br/wp-content/uploads/2019/02/Relogio_93-640x424.jpg" alt="Museu de antiguidades">
+                </div>
+                <div class="blog-post-content">
+                    <div class="post-meta">
+                        <span><i class="fas fa-calendar"></i> 20 de Novembro, 2023</span>
+                        <span><i class="fas fa-folder"></i> Exposição</span>
+                    </div>
+                    <h3 class="blog-post-title">Por Trás das Cenas: Nosso Novo Acervo</h3>
+                    <p class="blog-post-excerpt">
+                        Uma visita guiada ao processo de curadoria e preparação de peças para a nova exposição de relíquias históricas.
+                    </p>
+                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        // Menu toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

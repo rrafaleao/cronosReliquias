@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronos Relíquias - Serviços de Relojoaria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/drive-storage/AJQWtBPxychlj9GyHZAaa2_hlrA7FI0qY-msNk1TRHz4_Tq7nIIJbwxjEUc8bB1nKQkWmNc0Bu5dAwyoFRbVLnycfAvoY21sp2JeeMebB3Nkd86ZlDg=w1351-h633" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-meia-noite: #191970;
+            --preto-onix: #0D0D0D;
+            --dourado-antigo: #CFB53B;
+            --cobre-envelhecido: #B87333;
+            --branco-puro: #FFFFFF;
+            --cinza-elegante: #2A2A2A;
+            --sombra-dourada: 0 5px 15px rgba(207, 181, 59, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, var(--preto-onix) 0%, var(--azul-meia-noite) 100%);
+            color: var(--branco-puro);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--dourado-antigo);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dourado-antigo);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "⚙";
+            font-size: 1.5rem;
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--branco-puro);
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--dourado-antigo);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--dourado-antigo);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .main-content {
+            flex: 1;
+            padding-top: 80px;
+            padding-bottom: 40px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(25, 25, 112, 0.2), rgba(13, 13, 13, 0.2));
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--dourado-antigo);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23CFB53B" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23CFB53B" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="%23CFB53B" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--dourado-antigo);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            background: rgba(42, 42, 42, 0.5);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-button {
+            background: transparent;
+            border: 2px solid var(--dourado-antigo);
+            color: var(--dourado-antigo);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--dourado-antigo);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .tab-button:hover::before,
+        .tab-button.active::before {
+            left: 0;
+        }
+
+        .tab-button:hover,
+        .tab-button.active {
+            color: var(--preto-onix);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-dourada);
+        }
+
+        .service-content {
+            display: none;
+            background: rgba(42, 42, 42, 0.7);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(207, 181, 59, 0.2);
+        }
+
+        .service-content.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--dourado-antigo);
+            background: rgba(207, 181, 59, 0.1);
+            padding: 1rem;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dourado-antigo);
+        }
+
+        .service-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .service-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            background: rgba(25, 25, 112, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--dourado-antigo);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-dourada);
+        }
+
+        .feature-item h4 {
+            color: var(--dourado-antigo);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+
+        .calculator-section {
+            background: linear-gradient(135deg, rgba(25, 25, 112, 0.3), rgba(42, 42, 42, 0.3));
+            padding: 3rem;
+            border-radius: 15px;
+            margin-top: 3rem;
+            border: 2px solid var(--dourado-antigo);
+            backdrop-filter: blur(10px);
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--dourado-antigo);
+            margin-bottom: 1rem;
+        }
+
+        .calculator-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: var(--dourado-antigo);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group select,
+        .form-group input {
+            background: rgba(13, 13, 13, 0.7);
+            border: 2px solid var(--dourado-antigo);
+            color: var(--branco-puro);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--cobre-envelhecido);
+            box-shadow: var(--sombra-dourada);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(45deg, var(--dourado-antigo), var(--cobre-envelhecido));
+            border: none;
+            color: var(--preto-onix);
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2rem auto 0;
+            display: block;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(207, 181, 59, 0.4);
+        }
+
+        .result-section {
+            background: rgba(13, 13, 13, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            text-align: center;
+            display: none;
+            border: 1px solid var(--dourado-antigo);
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .result-price {
+            font-size: 3rem;
+            color: var(--dourado-antigo);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px 5%;
+            border-top: 2px solid var(--dourado-antigo);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dourado-antigo);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--dourado-antigo);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--branco-puro);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado-antigo);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cinza-elegante);
+            color: var(--dourado-antigo);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-dourada);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--dourado-antigo);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(13, 13, 13, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                clip-path: circle(0px at top right);
+                transition: clip-path 0.6s ease;
+            }
+            
+            .nav-links.active {
+                clip-path: circle(150% at top right);
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .services-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .service-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .calculator-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-section {
+                min-width: 100%;
+            }
+        }
+
+        .service-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid var(--dourado-antigo);
+            transition: transform 0.3s ease;
+        }
+
+        .service-gallery img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">Cronos Relíquias</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">Início</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li><a href="/servicos" style="color: var(--dourado-antigo);">Serviços</a></li>
+                <li><a href="/galeria">Galeria</a></li>
+                <li><a href="/catalogo">Catálogo</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <h1>Serviços de Relojoaria</h1>
+            <p>Especializados na preservação e restauração de relógios antigos. Combinamos técnicas tradicionais com tecnologia moderna para manter a precisão e beleza de peças históricas.</p>
+        </section>
+
+        <div class="services-tabs">
+            <button class="tab-button active" data-tab="restauracao">
+                <i class="fas fa-tools"></i> Restauração Completa
+            </button>
+            <button class="tab-button" data-tab="manutencao">
+                <i class="fas fa-cogs"></i> Manutenção Preventiva
+            </button>
+            <button class="tab-button" data-tab="avaliacao">
+                <i class="fas fa-search"></i> Avaliação e Perícia
+            </button>
+            <button class="tab-button" data-tab="consultoria">
+                <i class="fas fa-user-tie"></i> Consultoria Educativa
+            </button>
+            <button class="tab-button" data-tab="pecas">
+                <i class="fas fa-gem"></i> Peças Exclusivas
+            </button>
+            <button class="tab-button" data-tab="customizacao">
+                <i class="fas fa-paint-brush"></i> Customização Artesanal
+            </button>
+        </div>
+
+        <!-- Restauração -->
+        <div class="service-content active" id="restauracao">
+            <div class="service-header">
+                <div class="service-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h2 class="service-title">Restauração Completa</h2>
+            </div>
+            <p class="service-description">
+                Restauramos relógios antigos com técnicas tradicionais, preservando sua autenticidade histórica enquanto garantimos funcionamento perfeito para as próximas gerações.
+            </p>
+            <div class="service-features">
+                <div class="feature-item">
+                    <h4><i class="fas fa-cogs feature-icon"></i> Mecânica de Precisão</h4>
+                    <p>Restauração completa de mecanismos complexos com peças originais ou réplicas artesanais</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-paint-roller feature-icon"></i> Restauro de Caixas</h4>
+                    <p>Recuperação de caixas em ouro, prata e outros metais com técnicas de polimento especializadas</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-clock feature-icon"></i> Reconstituição de Mostradores</h4>
+                    <p>Restauração de mostradores históricos com preservação da pátina original</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-history feature-icon"></i> Recuperação de Peças Raras</h4>
+                    <p>Fabricamos peças exclusivas para modelos descontinuados ou de fabricação limitada</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manutenção -->
+        <div class="service-content" id="manutencao">
+            <div class="service-header">
+                <div class="service-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h2 class="service-title">Manutenção Preventiva</h2>
+            </div>
+            <p class="service-description">
+                Programas de manutenção personalizada para manter seus timepieces em condições óptimas, prolongando sua vida útil e precisão cronométrica.
+            </p>
+            <div class="service-features">
+                <div class="feature-item">
+                    <h4><i class="fas fa-oil-can feature-icon"></i> Lubrificação Especializada</h4>
+                    <p>Uso de óleos e graxas específicas para cada tipo de mecanismo e período histórico</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-ruler feature-icon"></i> Calibragem de Precisão</h4>
+                    <p>Ajustes cronométricos com equipamentos de última geração para máxima exatidão</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-calendar-alt feature-icon"></i> Planos Anuais</h4>
+                    <p>Programas de manutenção preventiva com visitas periódicas e relatórios detalhados</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-tachometer-alt feature-icon"></i> Testes de Resistência</h4>
+                    <p>Verificação de estanqueidade e resistência a variações de temperatura e pressão</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Avaliação -->
+        <div class="service-content" id="avaliacao">
+            <div class="service-header">
+                <div class="service-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h2 class="service-title">Avaliação e Perícia</h2>
+            </div>
+            <p class="service-description">
+                Análise técnica detalhada e certificação de autenticidade para colecionadores e seguradoras, com laudos técnicos reconhecidos internacionalmente.
+            </p>
+            <div class="service-features">
+                <div class="feature-item">
+                    <h4><i class="fas fa-file-certificate feature-icon"></i> Certificação de Autenticidade</h4>
+                    <p>Documentação detalhada com procedência histórica e análise técnica completa</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-balance-scale feature-icon"></i> Avaliação para Seguros</h4>
+                    <p>Laudos técnicos aceitos pelas principais seguradoras para cobertura adequada</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-gavel feature-icon"></i> Perícia Judicial</h4>
+                    <p>Pareceres técnicos para processos judiciais com total rigor científico e legal</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-chart-line feature-icon"></i> Avaliação de Investimento</h4>
+                    <p>Análise de valorização histórica e projeção de mercado para peças de coleção</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consultoria -->
+        <div class="service-content" id="consultoria">
+            <div class="service-header">
+                <div class="service-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h2 class="service-title">Consultoria Educativa</h2>
+            </div>
+            <p class="service-description">
+                Cursos e workshops sobre horologia para entusiastas, transmitindo conhecimentos fundamentais sobre mecânica relojoeira e história temporal.
+            </p>
+            <div class="service-features">
+                <div class="feature-item">
+                    <h4><i class="fas fa-graduation-cap feature-icon"></i> Workshops Técnicos</h4>
+                    <p>Aulas práticas sobre manutenção básica e identificação de relógios históricos</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-history feature-icon"></i> História da Relojoaria</h4>
+                    <p>Palestras sobre evolução técnica e artística da medição do tempo através dos séculos</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-microscope feature-icon"></i> Análise de Movimentos</h4>
+                    <p>Estudo detalhado de mecanismos históricos com demonstração prática</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-book feature-icon"></i> Biblioteca Especializada</h4>
+                    <p>Acesso exclusivo a catálogos históricos, manuais técnicos e literatura especializada</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Peças Exclusivas -->
+        <div class="service-content" id="pecas">
+            <div class="service-header">
+                <div class="service-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h2 class="service-title">Peças Exclusivas</h2>
+            </div>
+            <p class="service-description">
+                Curadoria de relógios raros e peças de coleção, oferecendo aos conhecedores acesso a timepieces únicos com proveniência documentada.
+            </p>
+            <div class="service-features">
+                <div class="feature-item">
+                    <h4><i class="fas fa-crown feature-icon"></i> Relógios de Colecionador</h4>
+                    <p>Peças raras com histórias fascinantes e procedência verificada</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-landmark feature-icon"></i> Peças de Época</h4>
+                    <p>Relógios históricos em estado original ou restaurados com critérios museológicos</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-certificate feature-icon"></i> Edições Limitadas</h4>
+                    <p>Produções especiais de mestres relojoeiros contemporâneos</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-search-dollar feature-icon"></i> Serviço de Procura</h4>
+                    <p>Localizamos peças específicas para colecionadores exigentes em todo o mundo</p>
+                </div>
+            </div>
+            
+            <div class="service-gallery">
+                <img src="https://images.unsplash.com/photo-1539874754764-5a96559165b0?q=80&w=1930&auto=format&fit=crop" alt="Relógio de colecionador">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop" alt="Relógio de ouro">
+                <img src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?q=80&w=1935&auto=format&fit=crop" alt="Relógio antigo">
+                <img src="https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=2070&auto=format&fit=crop" alt="Relógio de luxo">
+            </div>
+        </div>
+
+        <!-- Customização -->
+        <div class="service-content" id="customizacao">
+            <div class="service-header">
+                <div class="service-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h2 class="service-title">Customização Artesanal</h2>
+            </div>
+            <p class="service-description">
+                Criação de mostradores personalizados e gravações especiais, transformando relógios em herdeiros familiares únicos e memoráveis.
+            </p>
+            <div class="service-features">
+                <div class="feature-item">
+                    <h4><i class="fas fa-pencil-alt feature-icon"></i> Design Personalizado</h4>
+                    <p>Criação de mostradores exclusivos com temas e elementos personalizados</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-edit feature-icon"></i> Gravações Especiais</h4>
+                    <p>Inscrições comemorativas, brasões familiares ou mensagens significativas</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-gem feature-icon"></i> Engastamento de Pedras</h4>
+                    <p>Adição de diamantes e pedras preciosas com técnicas tradicionais</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fas fa-palette feature-icon"></i> Esmaltagem Artística</h4>
+                    <p>Técnicas ancestrais de esmaltação para criar verdadeiras obras de arte</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Cronos Relíquias</h3>
+                <p>Especialistas em restauração e conservação de relógios históricos. Preservando a precisão do passado para o futuro.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <a href="/">Início</a>
+                <a href="/sobre">Sobre Nós</a>
+                <a href="/servicos">Serviços</a>
+                <a href="/galeria">Galeria</a>
+                <a href="/contato">Contato</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Rua das Antiguidades, 123 - Centro</p>
+                <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+                <p><i class="fas fa-envelope"></i> contato@cronosreliquias.com.br</p>
+                <p><i class="fas fa-clock"></i> Seg-Sex: 9h-18h | Sáb: 10h-14h</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Cronos Relíquias. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Menu mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Botão voltar ao topo
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Fechar menu ao clicar em um link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Sistema de abas
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const serviceContents = document.querySelectorAll('.service-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active de todos os botões e conteúdos
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                serviceContents.forEach(content => content.classList.remove('active'));
+                
+                // Adiciona active ao botão clicado
+                this.classList.add('active');
+                
+                // Mostra o conteúdo correspondente
+                const targetTab = this.getAttribute('data-tab');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Animações ao scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.service-content');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Configurar elementos para animação
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.service-content');
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Executar na carga da página
+    </script>
+</body>
+</html>

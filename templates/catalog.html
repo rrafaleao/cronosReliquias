@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cronos Relíquias - Catálogo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/drive-storage/AJQWtBPxychlj9GyHZAaa2_hlrA7FI0qY-msNk1TRHz4_Tq7nIIJbwxjEUc8bB1nKQkWmNc0Bu5dAwyoFRbVLnycfAvoY21sp2JeeMebB3Nkd86ZlDg=w1351-h633" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -683,28 +684,8 @@
                 period: "midcentury",
                 style: "wristwatch",
                 year: "1955",
-                image: "https://images.pexels.com/photos/2783873/pexels-photo-2783873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                image: "https://i.ebayimg.com/thumbs/images/g/-KsAAOSw30lnE7Tn/s-l1200.jpg"
             },
-            {
-                id: 7,
-                name: "Relógio de Bolso Edwardiano",
-                description: "Relógio de bolso com tampa gravada e corrente em ouro 14k, mecanismo suíço de alta precisão.",
-                price: "R$ 14.200",
-                period: "edwardian",
-                style: "pocket",
-                year: "1905",
-                image: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            },
-            {
-                id: 8,
-                name: "Relógio Art Déco com Diamantes",
-                description: "Peça de joalheria com diamantes incrustados e design geométrico característico do período entre guerras.",
-                price: "R$ 28.500",
-                period: "artdeco",
-                style: "wristwatch",
-                year: "1930",
-                image: "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-            }
         ];
 
         // Referências aos elementos DOM
@@ -736,9 +717,6 @@
                                       'Cronômetro Marinho'}
                                 </span>
                             </div>
-                            <div class="zoom-icon">
-                                <i class="fas fa-search"></i>
-                            </div>
                         </div>
                         <div class="product-details">
                             <h3 class="product-name">${product.name}</h3>
@@ -749,7 +727,6 @@
                             <p class="product-description">${product.description}</p>
                             <div class="product-footer">
                                 <span class="product-price">${product.price}</span>
-                                <button class="product-button">Explorar Mecanismo</button>
                             </div>
                         </div>
                     </div>
@@ -759,30 +736,7 @@
             productGrid.innerHTML = productsHTML;
         }
         
-        // Efeito 3D nos cards
-        function initCardEffects() {
-            const cards = document.querySelectorAll('.product-card');
-            
-            cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-                });
-            });
-        }
+        
         
         // Inicializar
         window.addEventListener('DOMContentLoaded', () => {

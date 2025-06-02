@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronos Relíquias - Galeria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/drive-storage/AJQWtBPxychlj9GyHZAaa2_hlrA7FI0qY-msNk1TRHz4_Tq7nIIJbwxjEUc8bB1nKQkWmNc0Bu5dAwyoFRbVLnycfAvoY21sp2JeeMebB3Nkd86ZlDg=w1351-h633" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --azul-meia-noite: #191970;
+            --preto-onix: #0D0D0D;
+            --dourado-antigo: #CFB53B;
+            --cobre-envelhecido: #B87333;
+            --branco-puro: #FFFFFF;
+            --cinza-elegante: #2A2A2A;
+            --sombra-dourada: 0 5px 15px rgba(207, 181, 59, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: linear-gradient(135deg, var(--preto-onix) 0%, var(--azul-meia-noite) 100%);
+            color: var(--branco-puro);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--dourado-antigo);
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dourado-antigo);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo::before {
+            content: "⚙";
+            font-size: 1.5rem;
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--branco-puro);
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--dourado-antigo);
+        }
+
+        .nav-links a.active {
+            color: var(--dourado-antigo);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--dourado-antigo);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding-top: 100px;
+            padding-bottom: 40px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--dourado-antigo);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-header p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filtros por década */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-btn {
+            background: rgba(42, 42, 42, 0.7);
+            border: 2px solid var(--dourado-antigo);
+            color: var(--branco-puro);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-dourada);
+        }
+
+        /* Grade da galeria */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-item {
+            background: rgba(42, 42, 42, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--sombra-dourada);
+        }
+
+        /* Container para antes/depois */
+        .before-after-container {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .image-before,
+        .image-after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .image-after {
+            clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+        }
+
+        /* Controle deslizante */
+        .slider-control {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--dourado-antigo);
+            cursor: ew-resize;
+            z-index: 10;
+            transform: translateX(-50%);
+        }
+
+        .slider-control::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            background: var(--dourado-antigo);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 0 3px var(--preto-onix);
+        }
+
+        .slider-control::after {
+            content: '⇄';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--preto-onix);
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* Zoom progressivo */
+        .zoomable {
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .zoomable:hover {
+            transform: scale(1.1);
+        }
+
+        .zoomable.zoom-level-1 {
+            transform: scale(1.5);
+        }
+
+        .zoomable.zoom-level-2 {
+            transform: scale(2);
+        }
+
+        .zoomable.zoom-level-3 {
+            transform: scale(3);
+            cursor: zoom-out;
+        }
+
+        /* Controles de rotação */
+        .rotation-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .rotation-controls {
+            opacity: 1;
+        }
+
+        .rotation-btn {
+            width: 30px;
+            height: 30px;
+            background: rgba(207, 181, 59, 0.9);
+            border: none;
+            border-radius: 50%;
+            color: var(--preto-onix);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .rotation-btn:hover {
+            background: var(--dourado-antigo);
+            transform: scale(1.1);
+        }
+
+        /* Informações do item */
+        .item-info {
+            padding: 1.5rem;
+        }
+
+        .item-info h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dourado-antigo);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-info .decade {
+            color: var(--cobre-envelhecido);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-info p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Overlay para labels */
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .before-after-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .overlay-label {
+            color: var(--dourado-antigo);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Efeito parallax para mobile */
+        @media (max-width: 768px) {
+            .gallery-item {
+                transform: translateZ(0);
+            }
+            
+            .parallax-item {
+                transform: translateY(var(--parallax-offset, 0px));
+                transition: transform 0.1s ease-out;
+            }
+        }
+
+        .footer {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px 5%;
+            border-top: 2px solid var(--dourado-antigo);
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dourado-antigo);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--dourado-antigo);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--branco-puro);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado-antigo);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cinza-elegante);
+            color: var(--dourado-antigo);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-dourada);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--dourado-antigo);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(13, 13, 13, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                clip-path: circle(0px at top right);
+                transition: clip-path 0.6s ease;
+            }
+            
+            .nav-links.active {
+                clip-path: circle(150% at top right);
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-header h1 {
+                font-size: 2rem;
+            }
+            
+            .filters {
+                justify-content: center;
+            }
+        }
+
+        /* Animações de entrada */
+        .gallery-item {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">Cronos Relíquias</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">Início</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li><a href="/servicos">Serviços</a></li>
+                <li><a href="/galeria" class="active">Galeria</a></li>
+                <li><a href="/catalogo">Catálogo</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="gallery-header">
+            <h1>Galeria de Restaurações</h1>
+            <p>Descubra a transformação de relíquias históricas através do nosso trabalho especializado. Cada peça conta uma história de renascimento e preservação cultural.</p>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-decade="all">Todas as Décadas</button>
+            <button class="filter-btn" data-decade="1920">Década de 1920</button>
+            <button class="filter-btn" data-decade="1930">Década de 1930</button>
+            <button class="filter-btn" data-decade="1940">Década de 1940</button>
+            <button class="filter-btn" data-decade="1950">Década de 1950</button>
+            <button class="filter-btn" data-decade="1960">Década de 1960</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Item 1 -->
+           <div class="gallery-item parallax-item" data-decade="1920">
+                <div class="before-after-container">
+                    <img src="https://i.ytimg.com/vi/ZRBCLseXWRk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCS59wxVYiMAncLzXzG8FvXUXNs8A" alt="Relógio de bolso antes da restauração" class="image-before zoomable">
+                    <img src="https://us.123rf.com/450wm/elenaboronina/elenaboronina1705/elenaboronina170500082/79079248-rel%C3%B3gio-de-bolso-redondo-com-as-m%C3%A3os-e-uma-corrente-na-rocha-no-fundo-da-%C3%A1gua.jpg?ver=6" alt="Relógio de bolso restaurado" class="image-after zoomable">
+                    <div class="slider-control"></div>
+                    <div class="rotation-controls">
+                        <button class="rotation-btn" data-rotation="0">0°</button>
+                        <button class="rotation-btn" data-rotation="45">45°</button>
+                        <button class="rotation-btn" data-rotation="90">90°</button>
+                        <button class="rotation-btn" data-rotation="135">135°</button>
+                    </div>
+                    <div class="image-overlay">
+                        <span class="overlay-label">Antes</span>
+                        <span class="overlay-label">Depois</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h3>Relógio de Bolso Vitoriano</h3>
+                    <div class="decade">Década de 1920</div>
+                    <p>Restauração completa de mecanismo interno e polimento da caixa dourada. Trabalho de precisão que devolveu vida a esta peça centenária.</p>
+                </div>
+            </div>
+
+            <!-- Item 2 - Relógio de Parede -->
+            <div class="gallery-item parallax-item" data-decade="1930">
+                <div class="before-after-container">
+                    <img src="https://img.olx.com.br/images/97/978573642153813.webp" alt="Relógio de parede antes da restauração" class="image-before zoomable">
+                    <img src="https://images.tcdn.com.br/img/img_prod/608666/90_antigo_relogio_de_parede_carrilhao_27297_1_2fa36ee27e762306c597c64c687e0465.jpg" alt="Relógio de parede restaurado" class="image-after zoomable">
+                    <div class="slider-control"></div>
+                    <div class="rotation-controls">
+                        <button class="rotation-btn" data-rotation="0">0°</button>
+                        <button class="rotation-btn" data-rotation="45">45°</button>
+                        <button class="rotation-btn" data-rotation="90">90°</button>
+                        <button class="rotation-btn" data-rotation="135">135°</button>
+                    </div>
+                    <div class="image-overlay">
+                        <span class="overlay-label">Antes</span>
+                        <span class="overlay-label">Depois</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h3>Relógio de Parede Art Déco</h3>
+                    <div class="decade">Década de 1930</div>
+                    <p>Recuperação do mecanismo e restauro da caixa de madeira nobre. Este relógio adornava a sala de estar de uma mansão histórica em São Paulo.</p>
+                </div>
+            </div>
+
+            <!-- Item 3 - Relógio de Pulso -->
+            <div class="gallery-item parallax-item" data-decade="1940">
+                <div class="before-after-container">
+                    <img src="https://st.depositphotos.com/1776223/1991/i/950/depositphotos_19914143-stock-photo-broken-wristwatch.jpg" alt="Relógio de pulso antes da restauração" class="image-before zoomable">
+                    <img src="https://img.irroba.com.br/fit-in/600x600/filters:format(webp):fill(fff):quality(80)/helderjo/catalog/relogios/2165rl-13495h-20785.jpg" alt="Relógio de pulso restaurado" class="image-after zoomable">
+                    <div class="slider-control"></div>
+                    <div class="rotation-controls">
+                        <button class="rotation-btn" data-rotation="0">0°</button>
+                        <button class="rotation-btn" data-rotation="45">45°</button>
+                        <button class="rotation-btn" data-rotation="90">90°</button>
+                        <button class="rotation-btn" data-rotation="135">135°</button>
+                    </div>
+                    <div class="image-overlay">
+                        <span class="overlay-label">Antes</span>
+                        <span class="overlay-label">Depois</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h3>Relógio de Pulso Militar</h3>
+                    <div class="decade">Década de 1940</div>
+                    <p>Peça rara usada por oficiais na Segunda Guerra Mundial. Restauração completa do movimento e substituição do cristal original.</p>
+                </div>
+            </div>
+
+            <!-- Item 4 - Relógio de Bolso Especial -->
+            <div class="gallery-item parallax-item" data-decade="1950">
+                <div class="before-after-container">
+                    <img src="https://previews.123rf.com/images/alexdemeshko/alexdemeshko1612/alexdemeshko161200009/68125760-antique-silver-broken-pocket-watch-on-wooden-background.jpg" alt="Relógio de bolso antes da restauração" class="image-before zoomable">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/MontreGousset001.jpg/250px-MontreGousset001.jpg" alt="Relógio de bolso restaurado" class="image-after zoomable">
+                    <div class="slider-control"></div>
+                    <div class="rotation-controls">
+                        <button class="rotation-btn" data-rotation="0">0°</button>
+                        <button class="rotation-btn" data-rotation="45">45°</button>
+                        <button class="rotation-btn" data-rotation="90">90°</button>
+                        <button class="rotation-btn" data-rotation="135">135°</button>
+                    </div>
+                    <div class="image-overlay">
+                        <span class="overlay-label">Antes</span>
+                        <span class="overlay-label">Depois</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h3>Relógio de Bolso com Gravura</h3>
+                    <div class="decade">Década de 1950</div>
+                    <p>Peça com gravuras artísticas na tampa. Restauração do mecanismo e limpeza detalhada das gravuras em relevo.</p>
+                </div>
+            </div>
+
+            <!-- Item 5 - Relógio de Pêndulo -->
+            <div class="gallery-item parallax-item" data-decade="1960">
+                <div class="before-after-container">
+                    <img src="https://s2-g1.glbimg.com/WIbAyaDVaV9jYK7R9cfcByK0iik=/0x0:1920x1080/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/3/I/f4LuvERnC4XvAtlP7qEQ/relogio-depois.jpeg" alt="Relógio de pêndulo antes da restauração" class="image-before zoomable">
+                    <img src="https://fly.metroimg.com/upload/q_85,w_1200/https://uploads.metroimg.com/wp-content/uploads/2023/01/09125509/relogio-destruido-reproducao.jpg" alt="Relógio de pêndulo restaurado" class="image-after zoomable">
+                    <div class="slider-control"></div>
+                    <div class="rotation-controls">
+                        <button class="rotation-btn" data-rotation="0">0°</button>
+                        <button class="rotation-btn" data-rotation="45">45°</button>
+                        <button class="rotation-btn" data-rotation="90">90°</button>
+                        <button class="rotation-btn" data-rotation="135">135°</button>
+                    </div>
+                    <div class="image-overlay">
+                        <span class="overlay-label">Antes</span>
+                        <span class="overlay-label">Depois</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h3>Relógio de Pêndulo Francês</h3>
+                    <div class="decade">Década de 1960</div>
+                    <p>Restauração completa do mecanismo de pêndulo e polimento da caixa de madeira entalhada. Funcionamento perfeito restaurado.</p>
+                </div>
+            </div>
+
+            <!-- Item 6 - Relógio de Bolso com Calendário -->
+            <div class="gallery-item parallax-item" data-decade="1920">
+                <div class="before-after-container">
+                    <img src="https://media.istockphoto.com/id/622448678/pt/foto/wristwatch-destroyed-glass.jpg?s=1024x1024&w=is&k=20&c=Og_kqGuwoUJEAtZ_Fe8oDjgO50z72XVDE5S8QBLDXtE=" alt="Relógio com calendário antes da restauração" class="image-before zoomable">
+                    <img src="https://images.unsplash.com/photo-1585123334904-845d60e97b29?q=80&w=1935&auto=format&fit=crop" alt="Relógio com calendário restaurado" class="image-after zoomable">
+                    <div class="slider-control"></div>
+                    <div class="rotation-controls">
+                        <button class="rotation-btn" data-rotation="0">0°</button>
+                        <button class="rotation-btn" data-rotation="45">45°</button>
+                        <button class="rotation-btn" data-rotation="90">90°</button>
+                        <button class="rotation-btn" data-rotation="135">135°</button>
+                    </div>
+                    <div class="image-overlay">
+                        <span class="overlay-label">Antes</span>
+                        <span class="overlay-label">Depois</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h3>Relógio com Calendário Perpétuo</h3>
+                    <div class="decade">Década de 1920</div>
+                    <p>Relógio de precisão com calendário perpétuo. Restauração do complexo mecanismo e polimento da caixa em prata.</p>
+                </div>
+            </div>
+        </div>	
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Cronos Relíquias</h3>
+                <p>Especialistas em restauração e conservação de relíquias históricas e antiguidades. Preservando o passado para as gerações futuras.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <a href="/">Início</a>
+                <a href="/sobre">Sobre Nós</a>
+                <a href="/servicos">Serviços</a>
+                <a href="/galeria">Galeria</a>
+                <a href="/contato">Contato</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Rua das Antiguidades, 123 - Centro</p>
+                <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+                <p><i class="fas fa-envelope"></i> contato@cronosreliquias.com.br</p>
+                <p><i class="fas fa-clock"></i> Seg-Sex: 9h-18h | Sáb: 10h-14h</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 Cronos Relíquias. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Menu mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        // Botão voltar ao topo
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Fechar menu ao clicar em um link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Funcionalidade do slider antes/depois
+        function initBeforeAfterSliders() {
+            const containers = document.querySelectorAll('.before-after-container');
+            
+            containers.forEach(container => {
+                const slider = container.querySelector('.slider-control');
+                const afterImage = container.querySelector('.image-after');
+                let isDragging = false;
+                
+                function updateSlider(e) {
+                    const rect = container.getBoundingClientRect();
+                    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+                    
+                    slider.style.left = percentage + '%';
+                    afterImage.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+                }
+                
+                // Mouse events
+                slider.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    e.preventDefault();
+                });
+                
+                document.addEventListener('mousemove', (e) => {
+                    if (isDragging) {
+                        updateSlider(e);
+                    }
+                });
+                
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+                
+                // Touch events
+                slider.addEventListener('touchstart', (e) => {
+                    isDragging = true;
+                    e.preventDefault();
+                });
+                
+                document.addEventListener('touchmove', (e) => {
+                    if (isDragging) {
+                        updateSlider(e);
+                        e.preventDefault();
+                    }
+                });
+                
+                document.addEventListener('touchend', () => {
+                    isDragging = false;
+                });
+                
+                // Click to move slider
+                container.addEventListener('click', (e) => {
+                    if (!isDragging && e.target !== slider) {
+                        updateSlider(e);
+                    }
+                });
+            });
+        }
+
+        // Sistema de zoom progressivo
+        function initZoomSystem() {
+            const zoomables = document.querySelectorAll('.zoomable');
+            
+            zoomables.forEach(img => {
+                let zoomLevel = 0;
+                
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    
+                    // Remove classes anteriores
+                    img.classList.remove('zoom-level-1', 'zoom-level-2', 'zoom-level-3');
+                    
+                    // Incrementa nível de zoom
+                    zoomLevel = (zoomLevel + 1) % 4;
+                    
+                    // Aplica nova classe
+                    if (zoomLevel > 0) {
+                        img.classList.add(`zoom-level-${zoomLevel}`);
+                    }
+                });
+                
+                // Reset zoom ao sair da imagem
+                img.addEventListener('mouseleave', () => {
+                    if (zoomLevel < 3) {
+                        img.classList.remove('zoom-level-1', 'zoom-level-2', 'zoom-level-3');
+                        zoomLevel = 0;
+                    }
+                });
+            });
+        }
+
+        // Sistema de rotação
+        function initRotationSystem() {
+            const rotationControls = document.querySelectorAll('.rotation-controls');
+            
+            rotationControls.forEach(controls => {
+                const container = controls.closest('.before-after-container');
+                const images = container.querySelectorAll('.image-before, .image-after');
+                
+                controls.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('rotation-btn')) {
+                        const rotation = e.target.dataset.rotation;
+                        
+                        images.forEach(img => {
+                            img.style.transform = `rotate(${rotation}deg)`;
+                        });
+                        
+                        // Atualiza botão ativo
+                        controls.querySelectorAll('.rotation-btn').forEach(btn => {
+                            btn.style.background = 'rgba(207, 181, 59, 0.9)';
+                        });
+                        e.target.style.background = 'var(--dourado-antigo)';
+                    }
+                });
+            });
+        }
+
+        // Sistema de filtros por década
+        function initFilterSystem() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active de todos os botões
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const selectedDecade = btn.dataset.decade;
+                    
+                    galleryItems.forEach(item => {
+                        if (selectedDecade === 'all' || item.dataset.decade === selectedDecade) {
+                            item.style.display = 'block';
+                            item.style.animation = 'fadeInUp 0.6s ease forwards';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Efeito parallax para mobile
+        function initParallaxEffect() {
+            if (window.innerWidth <= 768) {
+                const parallaxItems = document.querySelectorAll('.parallax-item');
+                
+                window.addEventListener('scroll', () => {
+                    const scrollTop = window.pageYOffset;
+                    
+                    parallaxItems.forEach((item, index) => {
+                        const rect = item.getBoundingClientRect();
+                        const itemTop = rect.top + scrollTop;
+                        const windowHeight = window.innerHeight;
+                        
+                        // Calcula offset baseado na posição do scroll
+                        if (rect.top < windowHeight && rect.bottom > 0) {
+                            const offset = (scrollTop - itemTop) * 0.1;
+                            item.style.setProperty('--parallax-offset', `${offset}px`);
+                        }
+                    });
+                });
+            }
+        }
+
+        // Animação de entrada escalonada
+        function initStaggeredAnimation() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            initBeforeAfterSliders();
+            initZoomSystem();
+            initRotationSystem();
+            initFilterSystem();
+            initParallaxEffect();
+            initStaggeredAnimation();
+        });
+
+        // Resize handler para parallax
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                // Remove parallax em desktop
+                document.querySelectorAll('.parallax-item').forEach(item => {
+                    item.style.removeProperty('--parallax-offset');
+                });
+            } else {
+                initParallaxEffect();
+            }
+        });
+    </script>
+</body>
+</html>
