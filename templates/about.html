@@ -723,13 +723,51 @@
         .justify-center {
             justify-content: center;
         }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dourado-antigo);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--dourado-antigo);
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--branco-puro);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+        }
+
+        .footer-section a:hover {
+            color: var(--dourado-antigo);
+        }
+
     </style>
 </head>
 <body>
     <!-- Header com altura fixa -->
     <header class="header">
         <nav class="nav">
-            <a href="#" class="logo">Cronos Relíquias</a>
+            <a href="/" class="logo">Cronos Relíquias</a>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
@@ -737,7 +775,7 @@
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="/">Início</a></li>
-                <li><a href="/sobre">Sobre</a></li>
+                <li><a href="/sobre" style="color: var(--dourado-antigo);" >Sobre</a></li>
                 <li><a href="/servicos">Serviços</a></li>
                 <li><a href="/galeria">Galeria</a></li>
                 <li><a href="/catalogo">Catálogo</a></li>
@@ -832,6 +870,8 @@
                 <a href="/sobre">Sobre Nós</a>
                 <a href="/servicos">Serviços</a>
                 <a href="/galeria">Galeria</a>
+                <a href="/catalogo">Catálogo</a>
+                <a href="/blog">Blog</a>
                 <a href="/contato">Contato</a>
             </div>
             

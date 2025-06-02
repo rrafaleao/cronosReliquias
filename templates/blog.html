@@ -124,7 +124,6 @@
         }
 
         .blog-hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1617806118233-18e1de247200?q=80&w=1935&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             height: 400px;
@@ -138,17 +137,6 @@
             overflow: hidden;
         }
 
-        .blog-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, var(--dourado-antigo), var(--cobre-envelhecido));
-            opacity: 0.1;
-            animation: shimmer 3s ease-in-out infinite;
-        }
 
         @keyframes shimmer {
             0%, 100% { opacity: 0.1; }
@@ -462,7 +450,7 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="#" class="logo">Cronos Relíquias</a>
+            <a href="/" class="logo">Cronos Relíquias</a>
             <div class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
@@ -504,9 +492,7 @@
                     <p class="post-excerpt">
                         Descobra como combinamos métodos tradicionais de restauração com as mais avançadas tecnologias de conservação para preservar artefatos históricos únicos. Uma jornada fascinante através do tempo e da ciência.
                     </p>
-                    <a href="#" class="read-more">
-                        Ler Artigo Completo <i class="fas fa-arrow-right"></i>
-                    </a>
+                    
                 </div>
             </article>
 
@@ -541,7 +527,6 @@
                     <p class="blog-post-excerpt">
                         Conheça a história e os desafios técnicos envolvidos na restauração de relógios mecânicos do século XIX.
                     </p>
-                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
             
@@ -558,7 +543,6 @@
                     <p class="blog-post-excerpt">
                         Uma visita guiada ao processo de curadoria e preparação de peças para a nova exposição de relíquias históricas.
                     </p>
-                    <a href="#" class="read-more">Ler Mais <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
         </div>

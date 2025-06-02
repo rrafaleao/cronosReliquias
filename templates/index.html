@@ -52,6 +52,7 @@
             padding: 1rem 5%;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
         }
 
         .logo {
@@ -63,6 +64,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            z-index: 1001;
         }
 
         .logo::before {
@@ -76,6 +78,7 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Menu de navegação */
         .nav-links {
             display: flex;
             list-style: none;
@@ -107,6 +110,39 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        /* Menu Hamburger para Mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--dourado-antigo);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animação do hamburger para X */
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
         }
 
         .hero {
@@ -417,6 +453,7 @@
             color: var(--dourado-antigo);
         }
 
+        /* Correção para ícones tortos */
         .social-links {
             display: flex;
             gap: 15px;
@@ -434,6 +471,15 @@
             color: var(--dourado-antigo);
             font-size: 1.2rem;
             transition: all 0.3s ease;
+            /* Centralização perfeita */
+            position: relative;
+        }
+
+        .social-icon i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .social-icon:hover {
@@ -481,18 +527,35 @@
             box-shadow: var(--sombra-dourada);
         }
 
-        @media (max-width: 768px) {
+        /* Menu mobile - Correções necessárias */
+        @media (max-width: 992px) {
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(13, 13, 13, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem 0;
+                gap: 2.5rem;
+                clip-path: circle(0px at 95% 5%);
+                transition: clip-path 0.6s ease-in-out;
+                z-index: 1000;
             }
-
+            
+            .nav-links.active {
+                clip-path: circle(150% at 50% 50%);
+            }
+            
             .menu-toggle {
-                display: block;
-                cursor: pointer;
-                font-size: 1.8rem;
-                color: var(--branco-puro);
+                display: flex;
             }
+        }
 
+        @media (max-width: 768px) {
             .about-content {
                 grid-template-columns: 1fr;
             }
@@ -533,9 +596,14 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="#" class="logo">Cronos Relíquias</a>
-            <ul class="nav-links">
-                <li><a href="/">Início</a></li>
+            <a href="/" class="logo">Cronos Relíquias</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/" style="color: var(--dourado-antigo);">Início</a></li>
                 <li><a href="/sobre">Sobre</a></li>
                 <li><a href="/servicos">Serviços</a></li>
                 <li><a href="/galeria">Galeria</a></li>
@@ -626,10 +694,13 @@
             
             <div class="footer-section">
                 <h3>Links Rápidos</h3>
-                <a href="#inicio">Início</a>
-                <a href="#sobre">Sobre Nós</a>
-                <a href="#servicos">Serviços</a>
-                
+                <a href="/">Início</a>
+                <a href="/sobre">Sobre Nós</a>
+                <a href="/servicos">Serviços</a>
+                <a href="/galeria">Galeria</a>
+                <a href="/catalogo">Catálogo</a>
+                <a href="/blog">Blog</a>
+                <a href="/contato">Contato</a>
             </div>
             
             <div class="footer-section">
@@ -652,6 +723,28 @@
     </div>
 
     <script>
+        // Menu toggle functionality - Corrigido para funcionar em dispositivos móveis
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            
+            // Impede rolagem quando menu está aberto
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
