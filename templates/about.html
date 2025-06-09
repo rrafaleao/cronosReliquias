@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nós - Cronos Relíquias</title>
-    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/drive-storage/AJQWtBPxychlj9GyHZAaa2_hlrA7FI0qY-msNk1TRHz4_Tq7nIIJbwxjEUc8bB1nKQkWmNc0Bu5dAwyoFRbVLnycfAvoY21sp2JeeMebB3Nkd86ZlDg=w1351-h633" type="image/x-icon">
+    <link rel="shortcut icon" href="https://lh3.googleusercontent.com/drive-storage/AJQWtBMpnWmKZzSraAirbf9dRgrPmnwx_xEsuqM6AfREGOBxDS6xmErm8G4WZyB52vUOfjaXqrpvdhBFRW44CRYnKJYEIKsS7w8HoZhG3D3UVXrVTKc=w1366-h633" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -42,48 +42,46 @@
             display: flex;
             flex-direction: column;
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
-        /* HEADER FIXO COM ALTURA CONSISTENTE */
+        /* HEADER FLEXÍVEL */
         .header {
             position: fixed;
             top: 0;
             width: 100%;
-            height: 70px; /* Altura fixa para consistência */
             background: rgba(13, 13, 13, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 2px solid var(--dourado-antigo);
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 5%; /* Ajuste de padding */
+            padding: 1rem 5%;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
-            height: 100%; /* Ocupa toda altura do header */
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem; /* Tamanho ajustado */
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dourado-antigo);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 10px;
+            z-index: 1001;
         }
 
         .logo::before {
             content: "⚙";
-            font-size: 1.3rem; /* Tamanho ajustado */
+            font-size: 1.5rem;
             animation: rotate 8s linear infinite;
         }
 
@@ -95,7 +93,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1.8rem; /* Espaçamento ajustado */
+            gap: 2rem;
         }
 
         .nav-links a {
@@ -104,7 +102,7 @@
             font-weight: 400;
             transition: all 0.3s ease;
             position: relative;
-            font-size: 1rem; /* Tamanho consistente */
+            font-size: 1rem;
         }
 
         .nav-links a:hover {
@@ -114,7 +112,7 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -3px;
             left: 0;
             width: 0;
             height: 2px;
@@ -126,10 +124,10 @@
             width: 100%;
         }
         
-        /* Conteúdo principal com padding-top igual à altura do header */
+        /* Conteúdo principal com padding-top flexível */
         .main-content {
             flex: 1;
-            padding-top: 70px; /* Igual à altura do header */
+            padding-top: 5.5rem; /* Ajustado para altura flexível do header */
             width: 100%;
         }
 
@@ -379,9 +377,7 @@
             background-color: rgba(45, 45, 66, 0.7);
         }
 
-        
-
-        /* Team */
+        /* Team - Cards simplificados */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
@@ -401,58 +397,27 @@
         }
         
         .team-member {
-            position: relative;
-            perspective: 1000px;
-            cursor: pointer;
-            height: 350px;
-        }
-        
-        .team-card {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-        }
-        
-        .team-card.flipped {
-            transform: rotateY(180deg);
-        }
-        
-        .team-card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
+            background-color: rgba(45, 45, 66, 0.4);
             border-radius: 0.5rem;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: auto;
         }
         
-        .team-card-front {
-            transform: rotateY(0deg);
-        }
-        
-        .team-card-back {
-            transform: rotateY(180deg);
-            background-color: var(--timepiece-800);
-            border: 1px solid rgba(207, 181, 59, 0.3);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(207, 181, 59, 0.2);
         }
         
         .team-image-container {
             position: relative;
             width: 100%;
-            height: 100%;
+            height: 250px;
             overflow: hidden;
         }
         
         .team-image {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -460,12 +425,15 @@
         }
         
         .team-member:hover .team-image {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
         
         .team-overlay {
             position: absolute;
-            inset: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: linear-gradient(to top, var(--onyx), transparent);
             opacity: 0.8;
         }
@@ -491,15 +459,15 @@
         }
         
         .team-bio {
+            padding: 1.5rem;
             color: var(--gray-300);
             font-size: 0.875rem;
-            margin-bottom: 1rem;
-            flex-grow: 1;
         }
         
         .team-details {
             border-top: 1px solid rgba(207, 181, 59, 0.2);
             padding-top: 1rem;
+            margin-top: 1rem;
         }
         
         .team-detail {
@@ -611,7 +579,6 @@
             color: var(--dourado-antigo);
             font-size: 1.2rem;
             transition: all 0.3s ease;
-            /* Centralização perfeita */
             position: relative;
         }
 
@@ -622,6 +589,10 @@
             transform: translate(-50%, -50%);
         }
 
+        .social-icon:hover {
+            background: var(--dourado-antigo);
+            color: var(--preto-onix);
+        }
 
         .copyright {
             text-align: center;
@@ -662,7 +633,7 @@
             box-shadow: var(--sombra-dourada);
         }
 
-        /* Menu responsivo */
+        /* Menu responsivo ATUALIZADO */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -682,23 +653,39 @@
             transition: all 0.3s ease;
         }
 
-        @media (max-width: 768px) {
+        /* Animação do hamburger para X */
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        @media (max-width: 992px) {
             .nav-links {
                 position: fixed;
-                top: 70px; /* Ajustado para altura do header */
+                top: 0;
                 left: 0;
                 width: 100%;
-                background: rgba(13, 13, 13, 0.95);
+                height: 100vh;
+                background: rgba(13, 13, 13, 0.98);
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
                 padding: 2rem 0;
-                gap: 1.5rem;
+                gap: 2.5rem;
                 clip-path: circle(0px at top right);
-                transition: clip-path 0.6s ease;
+                transition: clip-path 0.6s ease-in-out;
+                z-index: 1000;
             }
             
             .nav-links.active {
-                clip-path: circle(150% at top right);
+                clip-path: circle(150% at center);
             }
             
             .menu-toggle {
@@ -719,6 +706,16 @@
 
             .page-header p {
                 font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                height: 250px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
             }
         }
 
@@ -770,7 +767,7 @@
     </style>
 </head>
 <body>
-    <!-- Header com altura fixa -->
+    <!-- Header com altura flexível -->
     <header class="header">
         <nav class="nav">
             <a href="/" class="logo">Cronos Relíquias</a>
@@ -981,24 +978,27 @@
                     `timeline-content ${index === activeIndex ? 'active' : 'inactive'}`;
             });
             
-            // Rolar para o elemento ativo
-            timelineElements[activeIndex].scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'center'
-            });
+            // Não rolar para o elemento ativo na inicialização
+            // Apenas quando o usuário clicar nos botões de navegação
+            if (arguments.length > 1) {
+                timelineElements[activeIndex].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
         }
 
         // Event listeners para navegação
         document.getElementById('prevTimelineEvent').addEventListener('click', () => {
-            updateActiveTimelineEvent(activeIndex - 1);
+            updateActiveTimelineEvent(activeIndex - 1, true);
         });
 
         document.getElementById('nextTimelineEvent').addEventListener('click', () => {
-            updateActiveTimelineEvent(activeIndex + 1);
+            updateActiveTimelineEvent(activeIndex + 1, true);
         });
 
-        // Inicializar com o primeiro evento ativo
+        // Inicializar com o primeiro evento ativo sem scroll
         updateActiveTimelineEvent(0);
 
         // Dados da equipe
@@ -1049,51 +1049,52 @@
             }
         ];
 
-        // Preencher a equipe
+        // Preencher a equipe com cards simplificados
         const teamGrid = document.getElementById('teamGrid');
         teamMembers.forEach(member => {
             const memberElement = document.createElement('div');
             memberElement.className = 'team-member';
             memberElement.innerHTML = `
-                <div class="team-card">
-                    <div class="team-card-face team-card-front">
-                        <div class="team-image-container">
-                            <img src="${member.frontImage}" alt="${member.name}" class="team-image">
-                            <div class="team-overlay"></div>
-                        </div>
-                        <div class="team-info">
-                            <h3 class="team-name">${member.name}</h3>
-                            <p class="team-role">${member.role}</p>
-                        </div>
+                <div class="team-image-container">
+                    <img src="${member.frontImage}" alt="${member.name}" class="team-image">
+                    <div class="team-overlay"></div>
+                    <div class="team-info">
+                        <h3 class="team-name">${member.name}</h3>
+                        <p class="team-role">${member.role}</p>
                     </div>
-                    <div class="team-card-face team-card-back">
-                        <p class="team-bio">${member.bio}</p>
-                        <div class="team-details">
-                            ${member.details.map(detail => `
-                                <div class="team-detail">
-                                    <div class="team-detail-label">${detail.label}</div>
-                                    <div class="team-detail-value">${detail.value}</div>
-                                </div>
-                            `).join('')}
-                        </div>
+                </div>
+                <div class="team-bio">
+                    <p>${member.bio}</p>
+                    <div class="team-details">
+                        ${member.details.map(detail => `
+                            <div class="team-detail">
+                                <div class="team-detail-label">${detail.label}</div>
+                                <div class="team-detail-value">${detail.value}</div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
             `;
             teamGrid.appendChild(memberElement);
-            
-            // Adicionar evento de clique para virar o card
-            memberElement.addEventListener('click', function() {
-                const card = this.querySelector('.team-card');
-                card.classList.toggle('flipped');
-            });
         });
 
-        // Menu responsivo
+        // Menu responsivo ATUALIZADO
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
         
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            });
         });
 
         // Botão voltar ao topo
@@ -1122,6 +1123,11 @@
             } else {
                 header.style.background = 'rgba(13, 13, 13, 0.95)';
             }
+        });
+        
+        // Garantir que a página comece no topo
+        window.addEventListener('load', () => {
+            window.scrollTo(0, 0);
         });
     </script>
 </body>
