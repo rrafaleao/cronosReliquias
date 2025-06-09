@@ -443,12 +443,15 @@
             color: var(--dourado-antigo);
             font-size: 1.2rem;
             transition: all 0.3s ease;
+            /* Centralização perfeita */
+            position: relative;
         }
 
-        .social-icon:hover {
-            background: var(--dourado-antigo);
-            color: var(--preto-onix);
-            transform: translateY(-3px);
+        .social-icon i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .copyright {

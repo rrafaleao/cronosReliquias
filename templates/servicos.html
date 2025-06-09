@@ -125,12 +125,10 @@
         .hero-section {
             text-align: center;
             padding: 4rem 0;
-            background: linear-gradient(rgba(25, 25, 112, 0.2), rgba(13, 13, 13, 0.2));
             border-radius: 15px;
             margin-bottom: 3rem;
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--dourado-antigo);
         }
 
         .hero-section::before {
@@ -486,13 +484,17 @@
             color: var(--dourado-antigo);
             font-size: 1.2rem;
             transition: all 0.3s ease;
+            /* Centralização perfeita */
+            position: relative;
         }
 
-        .social-icon:hover {
-            background: var(--dourado-antigo);
-            color: var(--preto-onix);
-            transform: translateY(-3px);
+        .social-icon i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
+
 
         .copyright {
             text-align: center;
